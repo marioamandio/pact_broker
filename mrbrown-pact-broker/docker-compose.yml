@@ -8,6 +8,8 @@ services:
       - ${APP_DATA_DIR}/nginx:/etc/nginx
     restart: on-failure
     user: "1000:1000"
+    networks:
+      - default
 
   postgres:
     image: postgres:14
@@ -19,6 +21,8 @@ services:
       - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
     restart: on-failure
     user: "1000:1000"
+    networks:
+      - default
 
   pact-broker:
     image: pactfoundation/pact-broker:latest
@@ -35,4 +39,11 @@ services:
       - postgres
     restart: on-failure
     user: "1000:1000"
+    networks:
+      - default
+
+networks:
+  default:
+    name: umbrel_main_network
+    external: true
  
