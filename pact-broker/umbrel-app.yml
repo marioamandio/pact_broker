@@ -2,7 +2,7 @@ manifestVersion: 1
 id: pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
-icon: https://pactflow.io/images/pact-broker-logo.png
+icon: ./assets/logo.png
 category: Development
 version: "1.0.0"
 port: ${APP_PORT}
