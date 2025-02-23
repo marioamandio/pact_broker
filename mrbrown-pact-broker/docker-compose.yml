@@ -5,7 +5,7 @@ services:
       APP_HOST: mrbrown-pact-broker_1
       APP_PORT: 9292
     volumes:
-      - ${APP_DATA_DIR}/nginx:/etc/nginx
+      - ${APP_DATA_DIR}/nginx:/etc/nginx:ro
     restart: on-failure
     user: "1000:1000"
     networks:
@@ -20,7 +20,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
     restart: on-failure
-    user: "1000:1000"
+    user: "postgres"
     networks:
       - default
 
@@ -29,7 +29,7 @@ services:
     environment:
       PACT_BROKER_DATABASE_USERNAME: pact
       PACT_BROKER_DATABASE_PASSWORD: pact
-      PACT_BROKER_DATABASE_HOST: postgres
+      PACT_BROKER_DATABASE_HOST: mrbrown-pact-broker_postgres_1
       PACT_BROKER_DATABASE_NAME: pact
       PACT_BROKER_PORT: 9292
       PACT_BROKER_BASIC_AUTH_USERNAME: admin
