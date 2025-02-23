@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   app_proxy:
     environment:
@@ -22,7 +20,7 @@ services:
     user: "1000:1000"
 
   pact-broker:
-    image: pactfoundation/pact-broker:2.107.0
+    image: pactfoundation/pact-broker:latest
     environment:
       PACT_BROKER_DATABASE_USERNAME: pact
       PACT_BROKER_DATABASE_PASSWORD: pact
