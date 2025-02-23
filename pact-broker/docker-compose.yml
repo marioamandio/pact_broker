@@ -4,7 +4,7 @@ services:
   app_proxy:
     image: nginx:1.17-alpine
     environment:
-      APP_HOST: pact-broker_pact-broker_1
+      APP_HOST: pact-broker-broker_pact-broker_1
       APP_PORT: ${APP_PORT}
     volumes:
       - ${APP_DATA_DIR}/nginx:/etc/nginx

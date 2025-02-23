@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: pact-broker
+id: pact-broker-broker
 name: Pact Broker
 tagline: Contract testing made easy
 icon: ./assets/logo.png
