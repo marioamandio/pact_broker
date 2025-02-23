@@ -15,15 +15,17 @@ services:
       POSTGRES_USER: pact
       POSTGRES_PASSWORD: pact
       POSTGRES_DB: pact
+      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
-    restart: on-failure
-    user: "1000:1000"
+      - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data/pgdata
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pact"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U pact -d pact"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+    user: "1000:1000"
 
   pact-broker:
     image: pactfoundation/pact-broker:latest
