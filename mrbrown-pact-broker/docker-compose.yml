@@ -12,15 +12,15 @@ services:
       - default
 
   postgres:
-    image: postgres:14
+    image: postgres:16-alpine
     environment:
       POSTGRES_USER: pact
       POSTGRES_PASSWORD: pact
       POSTGRES_DB: pact
     volumes:
-      - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data  # Change to named volume
     restart: on-failure
-    user: "postgres"
+    user: postgres  # Make sure to use the postgres user
     networks:
       - default
 
@@ -29,7 +29,7 @@ services:
     environment:
       PACT_BROKER_DATABASE_USERNAME: pact
       PACT_BROKER_DATABASE_PASSWORD: pact
-      PACT_BROKER_DATABASE_HOST: mrbrown-pact-broker_postgres_1
+      PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: pact
       PACT_BROKER_PORT: 9292
       PACT_BROKER_BASIC_AUTH_USERNAME: admin
