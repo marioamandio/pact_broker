@@ -1,18 +1,16 @@
 services:
-  postgres:
-    image: postgres:16-alpine
+  app_proxy:
     environment:
-      POSTGRES_USER: pact
-      POSTGRES_PASSWORD: pact
-      POSTGRES_DB: pact
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      APP_HOST: mrbrown-pact-broker_server_1
+      APP_PORT: 9292
     restart: on-failure
     networks:
       - umbrel_main_network
 
-  pact-broker:
+  server:
     image: pactfoundation/pact-broker:latest
+    user: "1000:1000"
+    init: true
     environment:
       PACT_BROKER_DATABASE_USERNAME: pact
       PACT_BROKER_DATABASE_PASSWORD: pact
@@ -22,16 +20,23 @@ services:
       PACT_BROKER_BASIC_AUTH_USERNAME: admin
       PACT_BROKER_BASIC_AUTH_PASSWORD: admin
       PACT_BROKER_LOG_LEVEL: DEBUG
-    ports:
-      - "9292:9292"
     depends_on:
       - postgres
     restart: on-failure
     networks:
       - umbrel_main_network
 
-volumes:
-  postgres_data:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: pact
+      POSTGRES_PASSWORD: pact
+      POSTGRES_DB: pact
+    volumes:
+      - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
+    restart: on-failure
+    networks:
+      - umbrel_main_network
 
 networks:
   umbrel_main_network:
