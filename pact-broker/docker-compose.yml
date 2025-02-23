@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: pact-broker_pact-broker_1
+      APP_PORT: ${APP_PORT}
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: pact
+      POSTGRES_PASSWORD: pact
+      POSTGRES_DB: pact
+    volumes:
+      - ${APP_DATA_DIR}/postgres:/var/lib/postgresql/data
+    restart: on-failure
+
+  pact-broker:
+    image: pactfoundation/pact-broker:2.107.0
+    environment:
+      PACT_BROKER_DATABASE_USERNAME: pact
+      PACT_BROKER_DATABASE_PASSWORD: pact
+      PACT_BROKER_DATABASE_HOST: postgres
+      PACT_BROKER_DATABASE_NAME: pact
+      PACT_BROKER_PORT: ${APP_PORT}
+      PACT_BROKER_BASIC_AUTH_USERNAME: admin
+      PACT_BROKER_BASIC_AUTH_PASSWORD: admin
+    depends_on:
+      - postgres
+    restart: on-failure
+    user: "1000:1000"
