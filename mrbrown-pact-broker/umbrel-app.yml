@@ -2,7 +2,7 @@ manifestVersion: 1
 id: mrbrown-pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
-icon: https://docs.pact.io/img/favicon.ico
+icon: ./assets/pact-broker.svg
 category: Development
 version: "1.0.1"
 port: 9292
