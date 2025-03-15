@@ -1,0 +1,24 @@
+manifestVersion: 1
+id: mrbrown-cypress
+category: development
+name: Sorry Cypress
+version: "1.0.0"
+tagline: Self-hosted Cypress Dashboard
+description: >-
+  Sorry-Cypress is a drop-in replacement for the Cypress Dashboard. It provides 
+  recording capabilities for your Cypress tests, with screenshots, videos, and 
+  parallel test execution.
+developer: Community
+website: https://sorry-cypress.dev
+dependencies: []
+repo: https://github.com/sorry-cypress/sorry-cypress
+support: https://github.com/sorry-cypress/sorry-cypress/issues
+port: 9293
+gallery:
+  - 1.png
+  - 2.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: YourName
+submission: YourName/sorry-cypress
