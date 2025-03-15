@@ -3,7 +3,7 @@ id: mrbrown-pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
 icon: ./assets/logo.svg
-version: "1.0.3"
+version: "1.0.4"
 port: 9292
 description: >-
   Pact Broker is an open-source tool that enables consumer-driven contract testing, 
