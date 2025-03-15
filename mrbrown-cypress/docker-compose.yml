@@ -61,9 +61,8 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/mongo:/data/db
     networks:
-      default:
-        aliases:
-          - mongo.${APP_DOMAIN}
+      - umbrel_main_network
+
 
   storage:
     image: minio/minio:RELEASE.2021-06-17T00-10-46Z
@@ -76,9 +75,8 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/minio:/data
     networks:
-      default:
-        aliases:
-          - storage.${APP_DOMAIN}
+      - umbrel_main_network
+
 
   createbuckets:
     image: minio/mc:RELEASE.2021-06-13T17-48-22Z
@@ -92,9 +90,8 @@ services:
       exit 0;
       "
     networks:
-      default:
-        aliases:
-          - createbuckets.${APP_DOMAIN}
+      - umbrel_main_network
+
 
 networks:
   umbrel_main_network:
