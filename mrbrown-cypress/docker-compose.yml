@@ -1,5 +1,4 @@
 services:
-
   app_proxy:
     environment:
       APP_HOST: mrbrown-cypress_server_1
@@ -7,11 +6,11 @@ services:
     restart: on-failure
     networks:
       - umbrel_main_network
-  
+
   director:
     image: agoldis/sorry-cypress-director:latest
     environment:
-      DASHBOARD_URL: http://localhost:8080
+      DASHBOARD_URL: http://localhost:9293
       EXECUTION_DRIVER: "../execution/mongo/driver"
       MONGODB_URI: "mongodb://mongo:27017"
       MONGODB_DATABASE: "sorry-cypress"
@@ -27,9 +26,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/director:/data
     networks:
-      default:
-        aliases:
-          - director.${APP_DOMAIN}
+      - umbrel_main_network
 
   api:
     image: agoldis/sorry-cypress-api:latest
@@ -39,25 +36,20 @@ services:
     restart: on-failure
     stop_grace_period: 1m
     networks:
-      default:
-        aliases:
-          - api.${APP_DOMAIN}
+      - umbrel_main_network
 
   dashboard:
     image: agoldis/sorry-cypress-dashboard:latest
     environment:
       GRAPHQL_SCHEMA_URL: http://api:4000
       GRAPHQL_CLIENT_CREDENTIALS: ""
-      PORT: "8080"
+      PORT: "9293"
     depends_on:
       - api
     restart: on-failure
     stop_grace_period: 1m
-    ports:
-      - "9293:8080"
     networks:
       - umbrel_main_network
-
 
   mongo:
     image: mongo:4.4
@@ -67,7 +59,6 @@ services:
       - ${APP_DATA_DIR}/data/mongo:/data/db
     networks:
       - umbrel_main_network
-
 
   storage:
     image: minio/minio:RELEASE.2021-06-17T00-10-46Z
@@ -82,7 +73,6 @@ services:
     networks:
       - umbrel_main_network
 
-
   createbuckets:
     image: minio/mc:RELEASE.2021-06-13T17-48-22Z
     depends_on:
@@ -96,7 +86,6 @@ services:
       "
     networks:
       - umbrel_main_network
-
 
 networks:
   umbrel_main_network:
