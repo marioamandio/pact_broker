@@ -23,7 +23,7 @@ submission: https://github.com/yourusername/pact-broker
 repo: https://github.com/pact-foundation/pact_broker
 support: https://github.com/pact-foundation/pact_broker/issues
 gallery:
-  - https://docs.pact.io/assets/images/pact-broker-network-diagram-39641a9a37e0973771db612c3fb095a4.png
+  - https://raw.githubusercontent.com/marioamandio/pact_broker/7704175146199894b7125754aca59ef625ccbe4f/mrbrown-pact-broker/assets/pact-broker.svg
 releaseNotes: >-
   Initial release of Pact Broker for Umbrel
 dependencies: []
