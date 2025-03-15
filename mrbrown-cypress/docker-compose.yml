@@ -11,7 +11,7 @@ services:
   director:
     image: agoldis/sorry-cypress-director:latest
     environment:
-      DASHBOARD_URL: http://localhost:9293
+      DASHBOARD_URL: http://localhost:8080
       EXECUTION_DRIVER: "../execution/mongo/driver"
       MONGODB_URI: "mongodb://mongo:27017"
       MONGODB_DATABASE: "sorry-cypress"
@@ -48,11 +48,16 @@ services:
     environment:
       GRAPHQL_SCHEMA_URL: http://api:4000
       GRAPHQL_CLIENT_CREDENTIALS: ""
-      PORT: "9293"
+      PORT: "8080"
     depends_on:
       - api
     restart: on-failure
     stop_grace_period: 1m
+    ports:
+      - "9293:8080"
+    networks:
+      - umbrel_main_network
+
 
   mongo:
     image: mongo:4.4
