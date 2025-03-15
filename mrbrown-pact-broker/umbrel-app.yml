@@ -2,8 +2,7 @@ manifestVersion: 1
 id: mrbrown-pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
-icon: https://raw.githubusercontent.com/marioamandio/pact_broker/7704175146199894b7125754aca59ef625ccbe4f/mrbrown-pact-broker/assets/pact-broker.svg
-category: Development
+icon: ./assets/logo.svg
 version: "1.0.3"
 port: 9292
 description: >-
@@ -23,7 +22,7 @@ submission: https://github.com/yourusername/pact-broker
 repo: https://github.com/pact-foundation/pact_broker
 support: https://github.com/pact-foundation/pact_broker/issues
 gallery:
-  - https://raw.githubusercontent.com/marioamandio/pact_broker/7704175146199894b7125754aca59ef625ccbe4f/mrbrown-pact-broker/assets/pact-broker.svg
+  - ./assets/logo.svg
 releaseNotes: >-
   Initial release of Pact Broker for Umbrel
 dependencies: []
