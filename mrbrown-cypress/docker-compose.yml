@@ -95,3 +95,7 @@ services:
       default:
         aliases:
           - createbuckets.${APP_DOMAIN}
+
+networks:
+  umbrel_main_network:
+    external: true
