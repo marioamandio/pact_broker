@@ -3,7 +3,9 @@ services:
     environment:
       APP_HOST: mrbrown-cypress_dashboard_1
       APP_PORT: 9293
+      PROXY_PATHS: '[{"path":"/graphql","host":"mrbrown-cypress_api_1","port":"4000"}]'
     restart: on-failure
+    
     networks:
       - umbrel_main_network
 
@@ -45,7 +47,7 @@ services:
   dashboard:
     image: agoldis/sorry-cypress-dashboard:latest
     environment:
-      GRAPHQL_SCHEMA_URL: http://api:4000/graphql
+      GRAPHQL_SCHEMA_URL: /graphql
 
 
       GRAPHQL_CLIENT_CREDENTIALS: ""
