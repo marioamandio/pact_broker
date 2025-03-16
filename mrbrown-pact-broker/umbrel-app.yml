@@ -2,10 +2,10 @@ manifestVersion: 1
 id: mrbrown-pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
-icon: https://raw.githubusercontent.com/marioamandio/pact_broker/7704175146199894b7125754aca59ef625ccbe4f/mrbrown-pact-broker/assets/pact-broker.svg
+icon: https://raw.githubusercontent.com/marioamandio/pact_broker/7704175146199894b7125754aca59ef625ccbe4f/assets/pact-broker.svg
 category: Development
 version: "1.0.0"
-port: 9290
+port: 9292
 description: >-
   Pact Broker is an open-source tool that enables consumer-driven contract testing, 
   allowing you to share and verify contracts between service consumers and providers.
