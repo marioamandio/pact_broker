@@ -1,7 +1,7 @@
 services:
   app_proxy:
     environment:
-      APP_HOST: mrbrown-cypress_server_1
+      APP_HOST: mrbrown-cypress_dashboard_1
       APP_PORT: 9293
     restart: on-failure
     networks:
@@ -40,7 +40,7 @@ services:
     networks:
       - umbrel_main_network
 
-  server:
+  dashboard:
     image: agoldis/sorry-cypress-dashboard:latest
     environment:
       GRAPHQL_SCHEMA_URL: http://api:4000
