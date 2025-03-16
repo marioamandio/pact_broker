@@ -75,19 +75,19 @@ services:
     networks:
       - umbrel_main_network
 
-  createbuckets:
-    image: minio/mc:RELEASE.2021-06-13T17-48-22Z
-    depends_on:
-      - storage
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc config host add myminio http://storage:9000 sorry-cypress sorry-cypress;
-      /usr/bin/mc mb myminio/sorry-cypress;
-      /usr/bin/mc policy set public myminio/sorry-cypress;
-      exit 0;
-      "
-    networks:
-      - umbrel_main_network
+  # createbuckets:
+  #   image: minio/mc:RELEASE.2021-06-13T17-48-22Z
+  #   depends_on:
+  #     - storage
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     /usr/bin/mc config host add myminio http://storage:9000 sorry-cypress sorry-cypress;
+  #     /usr/bin/mc mb myminio/sorry-cypress;
+  #     /usr/bin/mc policy set public myminio/sorry-cypress;
+  #     exit 0;
+  #     "
+  #   networks:
+  #     - umbrel_main_network
 
 networks:
   umbrel_main_network:
