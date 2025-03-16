@@ -4,6 +4,8 @@ services:
       APP_HOST: mrbrown-cypress_dashboard_1
       APP_PORT: 9293
       PROXY_PATHS: '[{"path":"/graphql","host":"mrbrown-cypress_api_1","port":"4000"}]'
+      PROXY_ADDITIONAL_HEADERS: '{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,POST,OPTIONS"}'
+
     restart: on-failure
     
     networks:
