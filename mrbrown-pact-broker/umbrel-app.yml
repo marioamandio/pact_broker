@@ -2,7 +2,7 @@ manifestVersion: 1
 id: mrbrown-pact-broker
 name: Pact Broker
 tagline: Contract testing made easy
-icon: https://github.com/marioamandio/pact_broker/blob/master/assets/pact-broker.svg
+icon: https://raw.githubusercontent.com/marioamandio/pact_broker/1db54e448e51e3b694f5880244a04ac339ee9467/assets/pact-broker.svg
 category: Development
 version: "1.0.0"
 port: 9292
