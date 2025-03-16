@@ -2,21 +2,37 @@ services:
   app_proxy:
     environment:
       APP_HOST: mrbrown-cypress_dashboard_1
-      APP_PORT: 9293
-      # This proxy config is more specific for GraphQL
-      PROXY_PATHS: '[{"path":"/graphql","host":"mrbrown-cypress_api_1","port":"4000"}]'
-      # Add these headers to explicitly handle the OPTIONS preflight request
-      PROXY_ADDITIONAL_HEADERS: '{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"}'
-
+      APP_PORT: 8080
     restart: on-failure
-    
+    networks:
+      - umbrel_main_network
+
+  api:
+    image: agoldis/sorry-cypress-api:latest
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017"
+      MONGODB_DATABASE: "sorry-cypress"
+    depends_on:
+      - mongo
+    restart: on-failure
+    networks:
+      - umbrel_main_network
+
+  dashboard:
+    image: agoldis/sorry-cypress-dashboard:latest
+    environment:
+      GRAPHQL_SCHEMA_URL: "http://api:4000/graphql"
+      PORT: "8080"
+    depends_on:
+      - api
+    restart: on-failure
     networks:
       - umbrel_main_network
 
   director:
     image: agoldis/sorry-cypress-director:latest
     environment:
-      DASHBOARD_URL: http://localhost:9293
+      DASHBOARD_URL: "http://dashboard:8080"
       EXECUTION_DRIVER: "../execution/mongo/driver"
       MONGODB_URI: "mongodb://mongo:27017"
       MONGODB_DATABASE: "sorry-cypress"
@@ -28,42 +44,14 @@ services:
       MINIO_BUCKET: "sorry-cypress"
       MINIO_USESSL: "false"
     restart: on-failure
-    stop_grace_period: 1m
     volumes:
       - ${APP_DATA_DIR}/data/director:/data
-    networks:
-      - umbrel_main_network
-
-  api:
-    image: agoldis/sorry-cypress-api:latest
-    environment:
-      MONGODB_URI: "mongodb://mongo:27017"
-      MONGODB_DATABASE: "sorry-cypress"
-      PORT: 4000
-    depends_on:
-      - mongo
-    restart: on-failure
-    stop_grace_period: 1m
-    networks:
-      - umbrel_main_network
-
-  dashboard:
-    image: agoldis/sorry-cypress-dashboard:latest
-    environment:
-      GRAPHQL_SCHEMA_URL: "http://localhost:4000/graphql"
-      GRAPHQL_CLIENT_CREDENTIALS: ""
-      PORT: "9293"
-    depends_on:
-      - api
-    restart: on-failure
-    stop_grace_period: 1m
     networks:
       - umbrel_main_network
 
   mongo:
     image: mongo:4.4
     restart: on-failure
-    stop_grace_period: 1m
     volumes:
       - ${APP_DATA_DIR}/data/mongo:/data/db
     networks:
@@ -76,25 +64,25 @@ services:
       MINIO_SECRET_KEY: "sorry-cypress"
     command: server /data
     restart: on-failure
-    stop_grace_period: 1m
     volumes:
       - ${APP_DATA_DIR}/data/minio:/data
     networks:
       - umbrel_main_network
 
-  # createbuckets:
-  #   image: minio/mc:RELEASE.2021-06-13T17-48-22Z
-  #   depends_on:
-  #     - storage
-  #   entrypoint: >
-  #     /bin/sh -c "
-  #     /usr/bin/mc config host add myminio http://storage:9000 sorry-cypress sorry-cypress;
-  #     /usr/bin/mc mb myminio/sorry-cypress;
-  #     /usr/bin/mc policy set public myminio/sorry-cypress;
-  #     exit 0;
-  #     "
-  #   networks:
-  #     - umbrel_main_network
+  createbuckets:
+    image: minio/mc:RELEASE.2021-06-13T17-48-22Z
+    depends_on:
+      - storage
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc config host add myminio http://storage:9000 sorry-cypress sorry-cypress;
+      /usr/bin/mc mb myminio/sorry-cypress;
+      /usr/bin/mc policy set public myminio/sorry-cypress;
+      exit 0;
+      "
+    networks:
+      - umbrel_main_network
 
 networks:
   umbrel_main_network:
