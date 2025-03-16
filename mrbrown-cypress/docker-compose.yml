@@ -37,14 +37,15 @@ services:
       - mongo
     restart: on-failure
     stop_grace_period: 1m
+    ports:
+      - "127.0.0.1:4000:4000"
     networks:
       - umbrel_main_network
 
   dashboard:
     image: agoldis/sorry-cypress-dashboard:latest
     environment:
-      GRAPHQL_SCHEMA_URL: http://mrbrown-cypress_api_1:4000
-
+      GRAPHQL_SCHEMA_URL: http://host.docker.internal:4000
       GRAPHQL_CLIENT_CREDENTIALS: ""
       PORT: "9293"
     depends_on:
