@@ -11,10 +11,10 @@ services:
   api:
     image: agoldis/sorry-cypress-api:latest
     environment:
-      MONGODB_URI: "mongodb://mongo:27017"
-      MONGODB_DATABASE: "sorry-cypress"
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: sorry-cypress
     ports:
-      - 5000:4000
+      - 9294:4000
     depends_on:
       - mongo
     restart: on-failure
@@ -24,8 +24,9 @@ services:
   dashboard:
     image: agoldis/sorry-cypress-dashboard:latest
     environment:
-      GRAPHQL_SCHEMA_URL: "http://192.168.1.128:5000/graphql"
-      PORT: "9293"
+      GRAPHQL_SCHEMA_URL: http://192.168.1.128:9294/graphql
+      CYPRESS_DIRECTOR_URL: http://192.168.1.128:9295
+      PORT: '9293'
     depends_on:
       - api
     restart: on-failure
@@ -35,18 +36,19 @@ services:
   director:
     image: agoldis/sorry-cypress-director:latest
     environment:
-      DASHBOARD_URL: "http://dashboard:9293"
-      EXECUTION_DRIVER: "../execution/mongo/driver"
-      MONGODB_URI: "mongodb://mongo:27017"
-      MONGODB_DATABASE: "sorry-cypress"
-      SCREENSHOTS_DRIVER: "../screenshots/minio.driver"
-      MINIO_ACCESS_KEY: "sorry-cypress"
-      MINIO_SECRET_KEY: "sorry-cypress"
-      MINIO_ENDPOINT: "storage"
-      MINIO_PORT: "9000"
-      MINIO_BUCKET: "sorry-cypress"
-      MINIO_USESSL: "false"
-    restart: on-failure
+      DASHBOARD_URL: http://192.168.1.128:9293
+      EXECUTION_DRIVER: ../execution/mongo/driver
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: sorry-cypress
+      SCREENSHOTS_DRIVER: ../screenshots/minio.driver
+      MINIO_ACCESS_KEY: sorry-cypress
+      MINIO_SECRET_KEY: sorry-cypress
+      MINIO_ENDPOINT: storage
+      MINIO_PORT: '9000'
+      MINIO_BUCKET: sorry-cypress
+      MINIO_USESSL: 'false'
+    ports:
+      - 9295:1234
     volumes:
       - ${APP_DATA_DIR}/data/director:/data
     networks:
@@ -63,8 +65,8 @@ services:
   storage:
     image: minio/minio:RELEASE.2021-06-17T00-10-46Z
     environment:
-      MINIO_ACCESS_KEY: "sorry-cypress"
-      MINIO_SECRET_KEY: "sorry-cypress"
+      MINIO_ACCESS_KEY: sorry-cypress
+      MINIO_SECRET_KEY: sorry-cypress
     command: server /data
     restart: on-failure
     volumes:
@@ -86,6 +88,7 @@ services:
       "
     networks:
       - default
+    container_name: mrbrown-cypress_createbuckets_1
 
 networks:
   default:
