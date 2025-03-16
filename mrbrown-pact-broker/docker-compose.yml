@@ -2,7 +2,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: mrbrown-pact-broker_server_1
-      APP_PORT: 9292
+      APP_PORT: 9290
     restart: on-failure
     networks:
       - umbrel_main_network
@@ -16,7 +16,7 @@ services:
       PACT_BROKER_DATABASE_PASSWORD: pact
       PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: pact
-      PACT_BROKER_PORT: 9292
+      PACT_BROKER_PORT: 9290
       PACT_BROKER_BASIC_AUTH_USERNAME: admin
       PACT_BROKER_BASIC_AUTH_PASSWORD: admin
       PACT_BROKER_LOG_LEVEL: DEBUG
