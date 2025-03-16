@@ -1,6 +1,7 @@
 manifestVersion: 1
 id: mrbrown-cypress
 category: Development
+version: "1.0.1"
 name: Sorry Cypress
 tagline: Self-hosted Cypress Dashboard
 description: >-
