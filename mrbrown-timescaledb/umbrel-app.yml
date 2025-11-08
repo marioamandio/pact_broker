@@ -3,7 +3,7 @@ id: mrbrown-timescaledb
 name: TimescaleDB
 tagline: Time-series PostgreSQL database with web GUI
 category: data
-version: "1.0.1"
+version: "1.0.2"
 port: 9293
 description: >-
   PostgreSQL with TimescaleDB extension - optimized for storing and analyzing time-series data.
@@ -37,7 +37,7 @@ releaseNotes: >-
   Initial release of TimescaleDB with pgAdmin for Umbrel.
   
   Default pgAdmin credentials (change after first login):
-  - Email: admin@timescaledb.local
+  - Email: admin@admin.com
   - Password: admin
   
   Database credentials:
@@ -46,5 +46,5 @@ releaseNotes: >-
   - Password: (your app password)
 dependencies: []
 path: ""
-defaultUsername: "admin@timescaledb.local"
+defaultUsername: "admin@admin.com"
 defaultPassword: "admin"
