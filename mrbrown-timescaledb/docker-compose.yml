@@ -34,6 +34,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:8.12
+    user: "1000:1000"
     restart: on-failure
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@timescaledb.local
@@ -50,4 +51,3 @@ services:
 networks:
   umbrel_main_network:
     external: true
-    
