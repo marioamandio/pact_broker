@@ -2,7 +2,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: mrbrown-timescaledb_pgadmin_1
-      APP_PORT: 80
+      APP_PORT: 9293
       PROXY_AUTH_ADD: "false"
     restart: on-failure
     depends_on:
@@ -36,7 +36,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:8.12
     restart: on-failure
-    user: "5050:5050"
+    user: "0:0"  # temporarily run as root so we can fix perms
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -50,8 +50,9 @@ services:
       - /bin/sh
       - -c
       - |
-        mkdir -p /var/lib/pgadmin/sessions && chown -R 5050:5050 /var/lib/pgadmin
-        /entrypoint.sh
+        mkdir -p /var/lib/pgadmin/sessions
+        chown -R 5050:5050 /var/lib/pgadmin
+        exec /entrypoint.sh
     depends_on:
       - timescaledb
     networks:
