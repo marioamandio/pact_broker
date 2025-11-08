@@ -1,0 +1,50 @@
+manifestVersion: 1
+id: mrbrown-timescaledb
+name: TimescaleDB
+tagline: Time-series PostgreSQL database with web GUI
+category: data
+version: "2.17.2"
+port: 9293
+description: >-
+  PostgreSQL with TimescaleDB extension - optimized for storing and analyzing time-series data.
+  
+  
+  Includes pgAdmin web interface for easy database management.
+  
+  
+  Features:
+  
+  - Time-series data storage and analytics
+  
+  - IoT sensor data collection
+  
+  - Financial data tracking
+  
+  - Application metrics and monitoring
+  
+  - Moving averages and aggregations
+  
+  - Web-based database management through pgAdmin
+
+developer: Timescale, Inc.
+website: https://www.timescale.com
+submitter: mrbrown
+submission: https://github.com/marioamandio/pact_broker
+repo: https://github.com/timescale/timescaledb
+support: https://docs.timescale.com
+gallery: []
+releaseNotes: >-
+  Initial release of TimescaleDB with pgAdmin for Umbrel.
+  
+  Default pgAdmin credentials (change after first login):
+  - Email: admin@timescaledb.local
+  - Password: admin
+  
+  Database credentials:
+  - Database: timescale_db
+  - Username: postgres
+  - Password: (your app password)
+dependencies: []
+path: ""
+defaultUsername: "admin@timescaledb.local"
+defaultPassword: "admin"
