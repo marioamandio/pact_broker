@@ -22,17 +22,14 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ${APP_DATA_DIR}/postgresql:/var/lib/postgresql/data
-    command:
-      - bash
+    command: 
+      - postgres
       - -c
-      - |
-        postgres -c shared_preload_libraries=timescaledb \
-                -c max_connections=200 \
-                -c shared_buffers=256MB &
-        pid=$!
-        sleep 5
-        psql -U postgres -d timescale_db -c "ALTER USER postgres PASSWORD 'postgres';" || true
-        wait $pid
+      - shared_preload_libraries=timescaledb
+      - -c
+      - max_connections=200
+      - -c
+      - shared_buffers=256MB
     networks:
       - umbrel_main_network
 
