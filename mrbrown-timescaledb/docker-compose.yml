@@ -12,7 +12,7 @@ services:
 
   timescaledb:
     container_name: mrbrown-timescaledb_timescaledb_1
-    image: timescale/timescaledb:2.17.2-pg16
+    image: timescale/timescaledb:2.23.0-pg16
     restart: on-failure
     stop_grace_period: 5m
     environment:
@@ -34,7 +34,7 @@ services:
       - umbrel_main_network
 
   pgadmin:
-    image: dpage/pgadmin4:8.12
+    image: dpage/pgadmin4:9.9
     restart: on-failure
     user: "0:0"  # temporarily run as root so we can fix perms
     environment:
