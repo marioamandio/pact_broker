@@ -18,7 +18,7 @@ services:
     environment:
       POSTGRES_DB: timescale_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${APP_PASSWORD}
+      POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ${APP_DATA_DIR}/postgresql:/var/lib/postgresql/data
