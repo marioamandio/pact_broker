@@ -3,7 +3,7 @@ id: mrbrown-timescaledb
 name: TimescaleDB
 tagline: Time-series PostgreSQL database with web GUI
 category: data
-version: "1.0.4"
+version: "1.0.5"
 port: 9293
 description: >-
   PostgreSQL with TimescaleDB extension - optimized for storing and analyzing time-series data.

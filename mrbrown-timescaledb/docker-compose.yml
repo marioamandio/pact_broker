@@ -43,6 +43,7 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: "False"
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
       PGADMIN_CONFIG_CHECK_EMAIL_DELIVERABILITY: "False"
+      PGADMIN_CONFIG_SESSION_DB_PATH: "/tmp/pgadmin_sessions"   # ← add this
     volumes:
       - ${APP_DATA_DIR}/pgadmin:/var/lib/pgadmin
     depends_on:
