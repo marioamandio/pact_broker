@@ -1,5 +1,5 @@
 manifestVersion: 1.1
-id: forgejo
+id: mrbrown-forgejo
 category: developer
 name: Forgejo
 version: "11.0.10"
